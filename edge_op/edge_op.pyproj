@@ -23,6 +23,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="edge_op.py" />
+    <Compile Include="layer.py" />
+    <Compile Include="operations.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="primitives.py" />
+    <Compile Include="trapeze.py" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
