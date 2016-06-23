@@ -3,7 +3,7 @@ import logging
 from trapeze import *
 from operations import *
 
-# логгирование
+# Р»РѕРіРіРёСЂРѕРІР°РЅРёРµ
 logging.basicConfig(
     format = '[%(asctime)s][%(levelname)s] %(message)s',
     stream = sys.stdout,
@@ -12,42 +12,42 @@ logging.basicConfig(
 logger = logging.getLogger("trapezoid")
 logger.info("Start programm")
 
-# считывание из файла
+# СЃС‡РёС‚С‹РІР°РЅРёРµ РёР· С„Р°Р№Р»Р°
 logger.info("File reading")
 f = open('12 edge')
 text = f.read()
 f.close()
 
-# разбор файла
+# СЂР°Р·Р±РѕСЂ С„Р°Р№Р»Р°
 logger.info("File parsing")
-edgesStr = [] # строки фигур
-end = text.find("---- Edges:") # находим строку "---- Shapes:"
-# заполняем лист фигур
+edgesStr = [] # СЃС‚СЂРѕРєРё С„РёРіСѓСЂ
+end = text.find("---- Edges:") # РЅР°С…РѕРґРёРј СЃС‚СЂРѕРєСѓ "---- Shapes:"
+# Р·Р°РїРѕР»РЅСЏРµРј Р»РёСЃС‚ С„РёРіСѓСЂ
 while end != -1:
     begin = end
-    # находим начало и конец след строки
+    # РЅР°С…РѕРґРёРј РЅР°С‡Р°Р»Рѕ Рё РєРѕРЅРµС† СЃР»РµРґ СЃС‚СЂРѕРєРё
     begin = text.find('\n', begin) + 1
     end   = text.find('\n', begin)
-    # добавляем строку в список фигур
+    # РґРѕР±Р°РІР»СЏРµРј СЃС‚СЂРѕРєСѓ РІ СЃРїРёСЃРѕРє С„РёРіСѓСЂ
     edgesStr.append(text[begin: end])      
 
-# построчный вывод файла
+# РїРѕСЃС‚СЂРѕС‡РЅС‹Р№ РІС‹РІРѕРґ С„Р°Р№Р»Р°
 for ln in edgesStr:
     print(ln)
 
-# разбор файла
+# СЂР°Р·Р±РѕСЂ С„Р°Р№Р»Р°
 trapezes = {}
 for str in edgesStr:
-    # получение номера слоя
+    # РїРѕР»СѓС‡РµРЅРёРµ РЅРѕРјРµСЂР° СЃР»РѕСЏ
     begin = str.find("Edge: M")
     if(begin != -1):
-        # получение номера слоя
+        # РїРѕР»СѓС‡РµРЅРёРµ РЅРѕРјРµСЂР° СЃР»РѕСЏ
         begin += len("Edge: M")
         end   = str.find(' ', begin)    
         layerNum = int(str[begin: end])
         tra = addTrapezes(trapezes, layerNum)
 
-        # получение параметра открывающий ли отрезок
+        # РїРѕР»СѓС‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° РѕС‚РєСЂС‹РІР°СЋС‰РёР№ Р»Рё РѕС‚СЂРµР·РѕРє
         begin = end + 1
         end =  str.find(' ', begin)
         isOpen = bool(str[begin: end])    
